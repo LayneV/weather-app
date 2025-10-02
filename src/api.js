@@ -1,7 +1,7 @@
-export async function getData() {
+export async function getData(location) {
   try {
     const response = await fetch(
-      "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/london?key=S25UCW7RV2JD7DY2A88EUHLFF"
+      `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location}?key=S25UCW7RV2JD7DY2A88EUHLFF`
     );
     if (!response.ok) {
       throw new Error("Network response was not ok");
