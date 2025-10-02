@@ -1,9 +1,22 @@
 import "./styles.css";
 import { getData } from "./api.js";
 
-async function main() {
-  const data = await getData("tokyo,japan");
-  console.log(`Current temp: ${data.currentConditions.temp}°F`);
-}
+const searchBtn = document.getElementById("search-button");
+const searchInput = document.getElementById("city-input");
+const weatherTemp = document.getElementById("temp");
 
-main();
+searchBtn.addEventListener("click", async () => {
+  const query = searchInput.value.trim();
+  if (query === "") {
+    alert("Please enter a city");
+    return null;
+  }
+
+  const data = await getData(query);
+  if (data === null) {
+    weatherTemp.innerHTML = "Type in a correct city.";
+  } else {
+    weatherTemp.innerHTML = `Current temp: ${Math.round(data.currentConditions.temp)}°F`;
+  }
+  searchInput.value = "";
+});
