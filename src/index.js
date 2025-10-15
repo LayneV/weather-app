@@ -1,36 +1,38 @@
 import "./styles.css";
 import { getData } from "./api.js";
 import { Weather } from "./weather.js";
+import * as ui from "./ui.js";
 
-const searchBtn = document.getElementById("search-button");
-const searchInput = document.getElementById("city-input");
-const weatherTemp = document.getElementById("temp");
-const weatherLocation = document.getElementById("location");
-const weatherConditions = document.getElementById("conditions");
-const weatherIcon = document.getElementById("weather-icon");
+let currentWeather = null;
+let currentUnit = "F";
 
-searchBtn.addEventListener("click", async () => {
-  const query = searchInput.value.trim();
+ui.searchBtn.addEventListener("click", async () => {
+  const query = ui.searchInput.value.trim();
   if (query === "") {
     alert("Please enter a city");
-    return null;
+    return;
   }
-  weatherLocation.innerHTML = "Loading...";
-  weatherTemp.innerHTML = "";
-  weatherIcon.src = "";
+
+  ui.displayLoading();
 
   const data = await getData(query);
+
   if (data === null) {
-    weatherTemp.innerHTML = "Type in a correct city.";
-    weatherLocation.innerHTML = "";
-    weatherConditions.innerHTML = "";
+    ui.displayError();
   } else {
-    const currentWeather = new Weather(data);
-    console.log(currentWeather);
-    weatherLocation.innerHTML = `${currentWeather.location}`;
-    weatherTemp.innerHTML = `Current temp: ${currentWeather.temperature}°F`;
-    weatherConditions.innerHTML = currentWeather.conditions;
-    weatherIcon.src = `https://raw.githubusercontent.com/visualcrossing/WeatherIcons/main/SVG/1st%20Set%20-%20Color/${currentWeather.icon}.svg`;
+    currentWeather = new Weather(data);
+    ui.renderWeather(currentWeather, currentUnit);
   }
-  searchInput.value = "";
+  ui.searchInput.value = "";
+});
+
+ui.unitToggleBtn.addEventListener("click", () => {
+  if (currentWeather != null) {
+    if (currentUnit === "F") {
+      currentUnit = "C";
+    } else {
+      currentUnit = "F";
+    }
+    ui.renderWeather(currentWeather, currentUnit);
+  }
 });
