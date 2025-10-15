@@ -2,6 +2,9 @@ const weatherTemp = document.getElementById("temp");
 const weatherLocation = document.getElementById("location");
 const weatherConditions = document.getElementById("conditions");
 const weatherIcon = document.getElementById("weather-icon");
+const weeklyForecastContainer = document.getElementById(
+  "weekly-forecast-container"
+);
 
 export const searchBtn = document.getElementById("search-button");
 export const searchInput = document.getElementById("city-input");
@@ -33,4 +36,25 @@ export function displayError() {
   weatherTemp.textContent = "Type in a correct city.";
   weatherConditions.textContent = "";
   weatherIcon.src = "";
+}
+
+export function renderWeeklyForecast(weeklyWeatherData) {
+  weeklyForecastContainer.innerHTML = "";
+  weeklyWeatherData.forEach((day) => {
+    let dailyWeatherCard = document.createElement("div");
+    dailyWeatherCard.classList.add("weekly-forecast");
+    let dayName = document.createElement("p");
+    let img = document.createElement("img");
+    let temps = document.createElement("p");
+
+    dayName.innerHTML = day.dayName;
+    img.src = `https://raw.githubusercontent.com/visualcrossing/WeatherIcons/main/SVG/1st%20Set%20-%20Color/${day.icon}.svg`;
+    temps.innerHTML = `High: ${day.maxTemp} Low: ${day.minTemp}`;
+
+    dailyWeatherCard.appendChild(dayName);
+    dailyWeatherCard.appendChild(img);
+    dailyWeatherCard.appendChild(temps);
+
+    weeklyForecastContainer.appendChild(dailyWeatherCard);
+  });
 }

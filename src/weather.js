@@ -20,8 +20,8 @@ export class Weather {
       const dayNameOfWeek = daysInWeek[today];
       return {
         dayName: dayNameOfWeek,
-        maxTemp: day.tempmax,
-        minTemp: day.tempmin,
+        maxTemp: Math.round(day.tempmax),
+        minTemp: Math.round(day.tempmin),
         icon: day.icon,
       };
     });
