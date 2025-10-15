@@ -6,6 +6,8 @@ const searchBtn = document.getElementById("search-button");
 const searchInput = document.getElementById("city-input");
 const weatherTemp = document.getElementById("temp");
 const weatherLocation = document.getElementById("location");
+const weatherConditions = document.getElementById("conditions");
+const weatherIcon = document.getElementById("weather-icon");
 
 searchBtn.addEventListener("click", async () => {
   const query = searchInput.value.trim();
@@ -15,6 +17,8 @@ searchBtn.addEventListener("click", async () => {
   }
   weatherLocation.innerHTML = "Loading...";
   weatherTemp.innerHTML = "";
+  weatherIcon.src = "";
+
   const data = await getData(query);
   if (data === null) {
     weatherTemp.innerHTML = "Type in a correct city.";
@@ -24,6 +28,8 @@ searchBtn.addEventListener("click", async () => {
     console.log(currentWeather);
     weatherLocation.innerHTML = `${currentWeather.location}`;
     weatherTemp.innerHTML = `Current temp: ${currentWeather.temperature}°F`;
+    weatherConditions.innerHTML = currentWeather.conditions;
+    weatherIcon.src = `https://raw.githubusercontent.com/visualcrossing/WeatherIcons/main/SVG/1st%20Set%20-%20Color/${currentWeather.icon}.svg`;
   }
   searchInput.value = "";
 });
