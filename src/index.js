@@ -22,7 +22,7 @@ ui.searchBtn.addEventListener("click", async () => {
   } else {
     currentWeather = new Weather(data);
     ui.renderWeather(currentWeather, currentUnit);
-    ui.renderWeeklyForecast(currentWeather.forecast);
+    ui.renderWeeklyForecast(currentWeather.forecast, currentUnit);
   }
   ui.searchInput.value = "";
 });
@@ -35,6 +35,6 @@ ui.unitToggleBtn.addEventListener("click", () => {
       currentUnit = "F";
     }
     ui.renderWeather(currentWeather, currentUnit);
+    ui.renderWeeklyForecast(currentWeather.forecast, currentUnit);
   }
 });
-

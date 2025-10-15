@@ -38,7 +38,7 @@ export function displayError() {
   weatherIcon.src = "";
 }
 
-export function renderWeeklyForecast(weeklyWeatherData) {
+export function renderWeeklyForecast(weeklyWeatherData, currentUnit) {
   weeklyForecastContainer.innerHTML = "";
   weeklyWeatherData.forEach((day) => {
     let dailyWeatherCard = document.createElement("div");
@@ -49,7 +49,11 @@ export function renderWeeklyForecast(weeklyWeatherData) {
 
     dayName.innerHTML = day.dayName;
     img.src = `https://raw.githubusercontent.com/visualcrossing/WeatherIcons/main/SVG/1st%20Set%20-%20Color/${day.icon}.svg`;
-    temps.innerHTML = `High: ${day.maxTemp} Low: ${day.minTemp}`;
+    if (currentUnit === "F") {
+      temps.innerHTML = `High: ${day.maxTemp}°F Low: ${day.minTemp}°F`;
+    } else {
+      temps.innerHTML = `High: ${day.maxTempC}°C Low: ${day.minTempC}°C`;
+    }
 
     dailyWeatherCard.appendChild(dayName);
     dailyWeatherCard.appendChild(img);

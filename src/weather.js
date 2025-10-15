@@ -21,7 +21,10 @@ export class Weather {
       return {
         dayName: dayNameOfWeek,
         maxTemp: Math.round(day.tempmax),
+        maxTempC: Math.round((day.tempmax - 32) / 1.8),
         minTemp: Math.round(day.tempmin),
+        minTempC: Math.round((day.tempmin - 32) / 1.8),
+
         icon: day.icon,
       };
     });
