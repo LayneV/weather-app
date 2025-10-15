@@ -23,6 +23,7 @@ searchBtn.addEventListener("click", async () => {
   if (data === null) {
     weatherTemp.innerHTML = "Type in a correct city.";
     weatherLocation.innerHTML = "";
+    weatherConditions.innerHTML = "";
   } else {
     const currentWeather = new Weather(data);
     console.log(currentWeather);
