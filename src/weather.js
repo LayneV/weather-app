@@ -5,5 +5,25 @@ export class Weather {
     this.conditions = data.currentConditions.conditions;
     this.icon = data.currentConditions.icon;
     this.temperatureC = Math.round((this.temperature - 32) / 1.8);
+    const daysInWeek = [
+      "Sunday",
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+    ];
+    this.forecast = data.days.map((day) => {
+      let date = new Date(day.datetime);
+      let today = date.getDay();
+      const dayNameOfWeek = daysInWeek[today];
+      return {
+        dayName: dayNameOfWeek,
+        maxTemp: day.tempmax,
+        minTemp: day.tempmin,
+        icon: day.icon,
+      };
+    });
   }
 }
