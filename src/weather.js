@@ -14,17 +14,21 @@ export class Weather {
       "Friday",
       "Saturday",
     ];
-    this.forecast = data.days.map((day) => {
-      let date = new Date(day.datetime);
-      let today = date.getDay();
-      const dayNameOfWeek = daysInWeek[today];
+    this.forecast = data.days.slice(0, 7).map((day, index) => {
+      let dayNameOfWeek;
+      if (index === 0) {
+        dayNameOfWeek = "Today";
+      } else {
+        let date = new Date(day.datetime);
+        let dayIndex = date.getDay();
+        dayNameOfWeek = daysInWeek[dayIndex];
+      }
       return {
         dayName: dayNameOfWeek,
         maxTemp: Math.round(day.tempmax),
         maxTempC: Math.round((day.tempmax - 32) / 1.8),
         minTemp: Math.round(day.tempmin),
         minTempC: Math.round((day.tempmin - 32) / 1.8),
-
         icon: day.icon,
       };
     });
