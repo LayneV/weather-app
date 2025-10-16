@@ -62,3 +62,22 @@ export function renderWeeklyForecast(weeklyWeatherData, currentUnit) {
     weeklyForecastContainer.appendChild(dailyWeatherCard);
   });
 }
+
+export function updateTheme(weatherData) {
+  document.body.classList.remove('theme-clear-day', 'theme-clear-night', 'theme-cloudy', 'theme-rain', 'theme-snow');
+  if (weatherData.icon.includes('rain')) {
+    document.body.classList.add('theme-rain');
+  }
+  else if (weatherData.icon.includes('cloudy')) {
+    document.body.classList.add('theme-cloudy')
+  }
+  else if (weatherData.icon.includes('night')) {
+    document.body.classList.add("theme-clear-night");
+  }
+  else if (weatherData.icon.includes('snow')) {
+    document.body.classList.add('theme-snow')
+  }
+  else {
+    document.body.classList.add("theme-clear-day");
+  }
+}

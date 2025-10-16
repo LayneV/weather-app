@@ -1,13 +1,255 @@
+/* --- 1. CSS Custom Properties (Variables) & Global Styles --- */
+:root {
+  /* Font Families */
+  --font-primary: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+
+  /* Spacing */
+  --spacing-small: 0.5rem;  /* 8px */
+  --spacing-medium: 1rem;   /* 16px */
+  --spacing-large: 2rem;    /* 32px */
+
+  /* Border Radius */
+  --border-radius-soft: 8px;
+  --border-radius-hard: 12px;
+
+  /* Card Style */
+  --card-background: rgba(255, 255, 255, 0.15);
+  --card-border-color: rgba(255, 255, 255, 0.25);
+  --card-box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+  --card-backdrop-filter: blur(10px);
+}
+
 * {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
 }
 
 body {
-  background-color: hsla(0, 4%, 31%, 0.534);
+  font-family: var(--font-primary);
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: var(--spacing-medium);
+  /* The transition makes theme changes smooth */
+  transition: background 0.8s ease-in-out, color 0.8s ease-in-out;
 }
 
-img {
-  max-width: 50px;
+/* --- 2. Dynamic Theme Classes --- */
+/* Each theme sets a background and the appropriate text colors for readability */
+
+/* Default / Clear Day Theme */
+body,
+body.theme-clear-day {
+  background: linear-gradient(135deg, #56ccf2, #2f80ed);
+  color: #1a1a1a;
+}
+
+/* Clear Night Theme */
+body.theme-clear-night {
+  background: linear-gradient(135deg, #232526, #414345);
+  color: #f0f0f0;
+}
+
+/* Cloudy Theme */
+body.theme-cloudy {
+  background: linear-gradient(135deg, #bdc3c7, #2c3e50);
+  color: #f0f0f0;
+}
+
+/* Rainy Theme */
+body.theme-rain {
+  background: linear-gradient(135deg, #6b778d, #3a4b62);
+  color: #f0f0f0;
+}
+
+/* Snow / Fog Theme */
+body.theme-snow {
+  background: linear-gradient(135deg, #e6dada, #fafafa);
+  color: #2c3e50;
+}
+
+
+/* --- 3. Main App Container & Layout --- */
+.main-container {
+  width: 100%;
+  max-width: 900px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-large);
+}
+
+/* --- 4. Search Bar & Button --- */
+.search-container {
+  display: flex;
+  gap: var(--spacing-small);
+}
+
+#city-input {
+  flex-grow: 1; /* Allows input to take up available space */
+  border: 1px solid transparent;
+  background-color: var(--card-background);
+  border-radius: var(--border-radius-soft);
+  padding: var(--spacing-medium);
+  font-size: 1.1rem;
+  color: currentColor; /* Inherits text color from the body theme */
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+#city-input::placeholder {
+  color: currentColor;
+  opacity: 0.7;
+}
+
+#city-input:focus {
+  border-color: var(--card-border-color);
+}
+
+#search-button,
+#unit-toggle-btn {
+  border: none;
+  background-color: var(--card-background);
+  color: currentColor;
+  padding: var(--spacing-medium);
+  border-radius: var(--border-radius-soft);
+  cursor: pointer;
+  font-size: 1.1rem;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+
+#search-button:hover,
+#unit-toggle-btn:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+/* --- 5. Main Weather Display Card --- */
+#weather-display {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-large);
+  padding: var(--spacing-large);
+  text-align: center;
+  
+  /* Glassmorphism Effect */
+  background: var(--card-background);
+  border-radius: var(--border-radius-hard);
+  border: 1px solid var(--card-border-color);
+  box-shadow: var(--card-box-shadow);
+  backdrop-filter: var(--card-backdrop-filter);
+  -webkit-backdrop-filter: var(--card-backdrop-filter);
+}
+
+#weather-icon {
+  width: 120px;
+  height: 120px;
+}
+
+.weather-info {
+  display: flex;
+  flex-direction: column;
+}
+
+#location {
+  font-size: 2.5rem;
+  font-weight: bold;
+}
+
+#temp {
+  font-size: 2rem;
+  font-weight: 500;
+}
+
+#conditions {
+  font-size: 1.25rem;
+  opacity: 0.9;
+}
+
+
+/* --- 6. Weekly Forecast Display --- */
+/* --- 6. Weekly Forecast Display --- */
+#weekly-forecast-container {
+  display: flex; /* This aligns children (the cards) in a row */
+  overflow-x: auto; /* This enables horizontal scrolling ONLY if needed */
+  gap: var(--spacing-medium); /* This creates space between the cards */
+  
+  /* Add some padding so cards don't touch the container edges when scrolling */
+  padding-bottom: var(--spacing-medium); 
+}
+.weekly-forecast {
+  /* Prevent cards from shrinking. Set a specific width. */
+  flex: 0 0 120px; 
+  /* ... the rest of your .weekly-forecast styles are fine ... */
+}
+
+.weekly-forecast {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-small);
+  padding: var(--spacing-medium);
+  
+  /* Glassmorphism Effect */
+  background: var(--card-background);
+  border-radius: var(--border-radius-hard);
+  border: 1px solid var(--card-border-color);
+  box-shadow: var(--card-box-shadow);
+  backdrop-filter: var(--card-backdrop-filter);
+  -webkit-backdrop-filter: var(--card-backdrop-filter);
+
+  text-align: center;
+}
+
+.weekly-forecast img {
+  width: 60px;
+  height: 60px;
+}
+
+.weekly-forecast p:first-child {
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+
+/* --- 7. Responsiveness for Mobile Devices --- */
+@media (max-width: 768px) {
+  #weather-display {
+    flex-direction: column;
+    gap: var(--spacing-medium);
+  }
+
+  #location {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    padding: var(--spacing-small);
+  }
+
+  .search-container {
+    flex-direction: column;
+  }
+}
+
+#weekly-forecast-container::-webkit-scrollbar {
+  height: 8px;
+}
+
+#weekly-forecast-container::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+}
+
+#weekly-forecast-container::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 4px;
+}
+
+#weekly-forecast-container::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.4);
 }

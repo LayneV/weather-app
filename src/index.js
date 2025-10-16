@@ -23,6 +23,7 @@ ui.searchBtn.addEventListener("click", async () => {
     currentWeather = new Weather(data);
     ui.renderWeather(currentWeather, currentUnit);
     ui.renderWeeklyForecast(currentWeather.forecast, currentUnit);
+    ui.updateTheme(currentWeather);
   }
   ui.searchInput.value = "";
 });
