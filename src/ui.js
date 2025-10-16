@@ -1,5 +1,6 @@
 const weatherTemp = document.getElementById("temp");
 const weatherLocation = document.getElementById("location");
+const weatherDisplay = document.getElementById("weather-display");
 const weatherConditions = document.getElementById("conditions");
 const weatherIcon = document.getElementById("weather-icon");
 const weeklyForecastContainer = document.getElementById(
@@ -22,6 +23,7 @@ export function renderWeather(weatherData, currentUnit) {
     weatherTemp.textContent = `Current temp: ${weatherData.temperatureC}°C`;
     unitToggleBtn.textContent = "Display in °F";
   }
+  weatherDisplay.classList.remove("hidden");
 }
 
 export function displayLoading() {
@@ -29,6 +31,8 @@ export function displayLoading() {
   weatherTemp.textContent = "";
   weatherConditions.textContent = "";
   weatherIcon.src = "";
+  weatherDisplay.classList.add("hidden"); 
+  weeklyForecastContainer.classList.add("hidden"); 
 }
 
 export function displayError() {
@@ -36,6 +40,8 @@ export function displayError() {
   weatherTemp.textContent = "Type in a correct city.";
   weatherConditions.textContent = "";
   weatherIcon.src = "";
+  weatherDisplay.classList.add("hidden"); 
+  weeklyForecastContainer.classList.add("hidden"); 
 }
 
 export function renderWeeklyForecast(weeklyWeatherData, currentUnit) {
@@ -60,6 +66,7 @@ export function renderWeeklyForecast(weeklyWeatherData, currentUnit) {
     dailyWeatherCard.appendChild(temps);
 
     weeklyForecastContainer.appendChild(dailyWeatherCard);
+     weeklyForecastContainer.classList.remove("hidden");
   });
 }
 

@@ -118,6 +118,7 @@ body.theme-snow {
   gap: var(--spacing-large);
   padding: var(--spacing-large);
   text-align: center;
+   transition: opacity 0.5s ease-in-out;
 
   background: var(--card-background);
   border-radius: var(--border-radius-hard);
@@ -167,6 +168,7 @@ body.theme-snow {
   display: flex;
   flex-direction: column;
   align-items: center;
+   transition: opacity 0.5s ease-in-out;
   gap: var(--spacing-small);
   padding: var(--spacing-medium);
 
@@ -227,4 +229,9 @@ body.theme-snow {
 
 #weekly-forecast-container::-webkit-scrollbar-thumb:hover {
   background: rgba(255, 255, 255, 0.4);
+}
+
+.hidden {
+  opacity: 0;
+  pointer-events: none; 
 }
