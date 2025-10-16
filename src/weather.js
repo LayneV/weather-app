@@ -29,6 +29,7 @@ export class Weather {
         maxTempC: Math.round((day.tempmax - 32) / 1.8),
         minTemp: Math.round(day.tempmin),
         minTempC: Math.round((day.tempmin - 32) / 1.8),
+        precipChance: Math.round(day.precipprob),
         icon: day.icon,
       };
     });
