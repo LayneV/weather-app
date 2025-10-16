@@ -1,19 +1,15 @@
-/* --- 1. CSS Custom Properties (Variables) & Global Styles --- */
 :root {
-  /* Font Families */
-  --font-primary: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-    Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  --font-primary:
+    system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 
-  /* Spacing */
-  --spacing-small: 0.5rem;  /* 8px */
-  --spacing-medium: 1rem;   /* 16px */
-  --spacing-large: 2rem;    /* 32px */
+  --spacing-small: 0.5rem;
+  --spacing-medium: 1rem;
+  --spacing-large: 2rem;
 
-  /* Border Radius */
   --border-radius-soft: 8px;
   --border-radius-hard: 12px;
 
-  /* Card Style */
   --card-background: rgba(255, 255, 255, 0.15);
   --card-border-color: rgba(255, 255, 255, 0.25);
   --card-box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
@@ -32,46 +28,37 @@ body {
   display: grid;
   place-items: center;
   padding: var(--spacing-medium);
-  /* The transition makes theme changes smooth */
-  transition: background 0.8s ease-in-out, color 0.8s ease-in-out;
+  transition:
+    background 0.8s ease-in-out,
+    color 0.8s ease-in-out;
 }
 
-/* --- 2. Dynamic Theme Classes --- */
-/* Each theme sets a background and the appropriate text colors for readability */
-
-/* Default / Clear Day Theme */
 body,
 body.theme-clear-day {
   background: linear-gradient(135deg, #56ccf2, #2f80ed);
   color: #1a1a1a;
 }
 
-/* Clear Night Theme */
 body.theme-clear-night {
   background: linear-gradient(135deg, #232526, #414345);
   color: #f0f0f0;
 }
 
-/* Cloudy Theme */
 body.theme-cloudy {
   background: linear-gradient(135deg, #bdc3c7, #2c3e50);
   color: #f0f0f0;
 }
 
-/* Rainy Theme */
 body.theme-rain {
   background: linear-gradient(135deg, #6b778d, #3a4b62);
   color: #f0f0f0;
 }
 
-/* Snow / Fog Theme */
 body.theme-snow {
   background: linear-gradient(135deg, #e6dada, #fafafa);
   color: #2c3e50;
 }
 
-
-/* --- 3. Main App Container & Layout --- */
 .main-container {
   width: 100%;
   max-width: 900px;
@@ -80,20 +67,19 @@ body.theme-snow {
   gap: var(--spacing-large);
 }
 
-/* --- 4. Search Bar & Button --- */
 .search-container {
   display: flex;
   gap: var(--spacing-small);
 }
 
 #city-input {
-  flex-grow: 1; /* Allows input to take up available space */
+  flex-grow: 1;
   border: 1px solid transparent;
   background-color: var(--card-background);
   border-radius: var(--border-radius-soft);
   padding: var(--spacing-medium);
   font-size: 1.1rem;
-  color: currentColor; /* Inherits text color from the body theme */
+  color: currentColor;
   outline: none;
   transition: border-color 0.3s;
 }
@@ -125,7 +111,6 @@ body.theme-snow {
   background-color: rgba(255, 255, 255, 0.3);
 }
 
-/* --- 5. Main Weather Display Card --- */
 #weather-display {
   display: flex;
   align-items: center;
@@ -133,8 +118,7 @@ body.theme-snow {
   gap: var(--spacing-large);
   padding: var(--spacing-large);
   text-align: center;
-  
-  /* Glassmorphism Effect */
+
   background: var(--card-background);
   border-radius: var(--border-radius-hard);
   border: 1px solid var(--card-border-color);
@@ -168,21 +152,15 @@ body.theme-snow {
   opacity: 0.9;
 }
 
-
-/* --- 6. Weekly Forecast Display --- */
-/* --- 6. Weekly Forecast Display --- */
 #weekly-forecast-container {
-  display: flex; /* This aligns children (the cards) in a row */
-  overflow-x: auto; /* This enables horizontal scrolling ONLY if needed */
-  gap: var(--spacing-medium); /* This creates space between the cards */
-  
-  /* Add some padding so cards don't touch the container edges when scrolling */
-  padding-bottom: var(--spacing-medium); 
+  display: flex;
+  overflow-x: auto;
+  gap: var(--spacing-medium);
+
+  padding-bottom: var(--spacing-medium);
 }
 .weekly-forecast {
-  /* Prevent cards from shrinking. Set a specific width. */
-  flex: 0 0 120px; 
-  /* ... the rest of your .weekly-forecast styles are fine ... */
+  flex: 0 0 120px;
 }
 
 .weekly-forecast {
@@ -191,8 +169,7 @@ body.theme-snow {
   align-items: center;
   gap: var(--spacing-small);
   padding: var(--spacing-medium);
-  
-  /* Glassmorphism Effect */
+
   background: var(--card-background);
   border-radius: var(--border-radius-hard);
   border: 1px solid var(--card-border-color);
@@ -213,8 +190,6 @@ body.theme-snow {
   font-size: 1.1rem;
 }
 
-
-/* --- 7. Responsiveness for Mobile Devices --- */
 @media (max-width: 768px) {
   #weather-display {
     flex-direction: column;
